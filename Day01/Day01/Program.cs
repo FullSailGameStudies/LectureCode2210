@@ -8,12 +8,14 @@ namespace Day01
         {
             Console.WriteLine("Hello Gotham! I am the hero you need.");
 
+            ConsoleColor backColor;
             int x1 = 0;
             int y1 = 0;
             for (int i = 0; i < 20; i++)
             {
+                RandomColor(out backColor);
                 RandomPosition(ref x1, ref y1);
-                DrawBlock(x1, y1);
+                DrawBlock(x1, y1, backColor);
             }
             DrawBlock(10, 25);
             DrawBlock(x1 + 2, y1 - 3);
@@ -81,19 +83,11 @@ namespace Day01
         //
 
         //add an optional color parameter
-        static void DrawBlock(int x, int y)
+        static void DrawBlock(int x, int y, ConsoleColor color = ConsoleColor.DarkCyan)
         {
-            //int x = Console.WindowWidth / 2;
-            //int y = Console.WindowHeight / 2;
-
             Console.SetCursorPosition(x, y);
-
-            ConsoleColor backColor;
-            RandomColor(out backColor);
-            Console.BackgroundColor = backColor;
-
+            Console.BackgroundColor = color;
             Console.Write("     ");
-
             Console.ResetColor();
         }
 
