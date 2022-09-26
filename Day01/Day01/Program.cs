@@ -18,10 +18,31 @@ namespace Day01
             DrawBlock(10, 25);
             DrawBlock(x1 + 2, y1 - 3);
 
-            int sum = 0;
-            int factor = Factor(3,ref sum);
+            int sum;// = 0;
+            int factor = Factor(3,out sum);
             Console.WriteLine($"3 * {factor} = {sum}");
             Console.ReadKey();
+        }
+
+        //create a method to randomly generate a color
+        //use an out parameter
+        //call it in DrawBlock to change the color of the block
+
+        static bool IntTryParse(string input, out int number)
+        {
+            bool isANumber = false;
+            number = 0;
+            //use try-catch to handle exceptions
+            try
+            {
+                number = int.Parse(input);
+                isANumber = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR! ERROR! Not a number!");
+            }
+            return isANumber;
         }
 
         // create a method to randomly generate x,y
@@ -36,7 +57,7 @@ namespace Day01
 
         static Random rando = new Random();
 
-        static int Factor(int num,ref int result)
+        static int Factor(int num,out int result)
         {
             int factor = 3;// random.Next(10);
             result = num * factor;
