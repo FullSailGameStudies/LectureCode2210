@@ -8,9 +8,13 @@ namespace Day01
         {
             Console.WriteLine("Hello Gotham! I am the hero you need.");
 
-            int x1 = Console.WindowWidth / 2;
-            int y1 = Console.WindowHeight / 2;
-            DrawBlock(x1, y1);
+            int x1 = 0;
+            int y1 = 0;
+            for (int i = 0; i < 20; i++)
+            {
+                RandomPosition(ref x1, ref y1);
+                DrawBlock(x1, y1);
+            }
             DrawBlock(10, 25);
             DrawBlock(x1 + 2, y1 - 3);
 
@@ -22,10 +26,18 @@ namespace Day01
 
         // create a method to randomly generate x,y
         // use ref parameters to return the x,y
+        // call it in main to get x,y for calling DrawBlock
+        static void RandomPosition(ref int x, ref int y)
+        {
+            //0 - (WindowWidth-1)
+            x = rando.Next(Console.WindowWidth);
+            y = rando.Next(Console.WindowHeight);
+        }
+
+        static Random rando = new Random();
 
         static int Factor(int num,ref int result)
         {
-            Random random = new Random();
             int factor = 3;// random.Next(10);
             result = num * factor;
             return factor;
