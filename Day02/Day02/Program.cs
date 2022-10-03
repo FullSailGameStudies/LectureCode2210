@@ -35,6 +35,24 @@ namespace Day02
             //CHALLENGE 01:
             //create a list of doubles to hold the prices of your menu items
             //create a method to print the menu items and their prices
+
+            List<double> prices = new List<double>();
+            prices.Add(6.99);
+            prices.Add(3.99);
+            prices.Add(2.99);
+            prices.Add(5.99);
+            prices.Add(4.99);
+            PrintMenu(menu, prices);
+        }
+
+        private static void PrintMenu(List<string> menuItems, List<double> itemPrices)
+        {
+            Console.Clear();
+            Console.WriteLine("------Full Sail Brews-------");
+            for (int i = 0; i < menuItems.Count; i++)
+            {
+                Console.WriteLine($"{itemPrices[i],6:C2} {menuItems[i]}");
+            }
         }
 
         static void Info(List<string> myList)
