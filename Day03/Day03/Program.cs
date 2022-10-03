@@ -41,8 +41,13 @@ namespace Day03
             //dictionary challenge 01
             //create a method to print the dictionary
             //
+            Print(coffeeShop);
+        }
+
+        static void Print(Dictionary<string, double> menu)
+        {
             Console.WriteLine("------Full Sail Brews-------");
-            foreach (KeyValuePair<string, double> menuItem in coffeeShop)
+            foreach (KeyValuePair<string, double> menuItem in menu)
             {
                 string name = menuItem.Key;
                 double price = menuItem.Value;
