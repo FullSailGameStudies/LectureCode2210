@@ -8,6 +8,9 @@ namespace Day05
     {
         static void Main(string[] args)
         {
+            List<int> nums = new List<int>() { 5, 13, 7, 3, 42 };
+            Split(nums);
+            Console.ReadKey();
             string s1 = "Batman", s2 = "Batmen";
             //CompareTo
             //returns an int
@@ -42,6 +45,30 @@ namespace Day05
             Console.Write((char)65);
             Console.Write((char)78);
             Console.ReadKey();
+        }
+
+        private static void Split(List<int> nums)
+        {
+            List<int> left = new List<int>();
+            List<int> right = new List<int>();
+            int mid = nums.Count / 2;
+            for (int i = 0; i < nums.Count; i++)
+            {
+                if(i < mid) 
+                    left.Add(nums[i]);
+                else 
+                    right.Add(nums[i]);
+            }
+            Console.WriteLine("---------LEFT--------");
+            for (int i = 0; i < left.Count; i++)
+            {
+                Console.WriteLine(left[i]);
+            }
+            Console.WriteLine("---------RIGHT--------");
+            for (int i = 0; i < right.Count; i++)
+            {
+                Console.WriteLine(right[i]);
+            }
         }
 
         static void Bats(int i)
