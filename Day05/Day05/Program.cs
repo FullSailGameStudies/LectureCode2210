@@ -35,11 +35,19 @@ namespace Day05
         {
             if(i < 100)
             {
+                Console.ForegroundColor = GetColor();
                 Console.Write((char)78);
                 Console.Write((char)65);
                 Console.Write(' ');
                 Bats(i + 1);
             }
+        }
+        static Random rando = new Random();
+        private static ConsoleColor GetColor()
+        {
+            ConsoleColor color;
+            while ((color = (ConsoleColor)rando.Next(16)) == ConsoleColor.Black);
+            return color;
         }
 
         static ulong Factorial(uint N)
