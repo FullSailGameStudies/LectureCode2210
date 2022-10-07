@@ -8,6 +8,19 @@ namespace Day05
     {
         static void Main(string[] args)
         {
+            string s1 = "Batman", s2 = "Batmen";
+            //CompareTo
+            //returns an int
+            //  -1   LESS THAN
+            //   0   EQUAL TO
+            //   1   GREATER THAN
+            int compResult = s1.CompareTo(s2);
+            if (compResult == 0) Console.WriteLine($"{s1} EQUALS {s2}");
+            else if(compResult > 0) Console.WriteLine($"{s1} GREATER THAN {s2}");
+            else if (compResult < 0) Console.WriteLine($"{s1} LESS THAN {s2}");
+            Console.ReadKey();
+
+
             for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine(i);
