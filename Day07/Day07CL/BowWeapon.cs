@@ -8,7 +8,8 @@ namespace Day07CL
 {
     public class BowWeapon : FantasyWeapon
     {
-        public BowWeapon(int arrowCount, int arrowCapacity, WeaponRarity rarity, int level, int maxDamage, int cost) : base(rarity, level, maxDamage, cost)
+        public BowWeapon(int arrowCount, int arrowCapacity, WeaponRarity rarity, int level, int maxDamage, int cost) 
+            : base(rarity, level, maxDamage, cost)
         {
             ArrowCount = arrowCount;
             ArrowCapacity = arrowCapacity;

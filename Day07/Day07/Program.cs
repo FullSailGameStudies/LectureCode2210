@@ -12,30 +12,71 @@ namespace Day07
         static Random randy = new Random();
         static void Main(string[] args)
         {
-            Inventory backpack = new Inventory(3, new List<string>());
-            backpack.AddItem("map");
-            backpack.AddItem("shovel");
-            backpack.AddItem("sword");
-            try
-            {
-                backpack.AddItem("pipe bomb");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            Console.ReadKey();
+            int num = 5;//4 bytes
+            long bigNum = num;//8 bytes. implicit casting
+            num = (int)bigNum;//explicit casting
+            //num = (int)"5";
+
+
+            Inventory backpack = new Inventory(3, new List<FantasyWeapon>());
+            //backpack.AddItem("map");
+            //backpack.AddItem("shovel");
+            //backpack.AddItem("sword");
+            //try
+            //{
+            //    backpack.AddItem("pipe bomb");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+            //Console.ReadKey();
 
             FantasyWeapon sting = new FantasyWeapon(WeaponRarity.Legendary, 100, 1000, 100000);
             int damage = sting.DoDamage();
             Console.WriteLine($"Dora swings sting and does {damage} damage to the rat.");
+            backpack.AddItem(sting);
+            backpack.AddItem(new BowWeapon(5, 10, WeaponRarity.Common, 1, 10, 10));
 
-            GameObject player;//null
+            Player player;//null
             int xPos = Console.WindowWidth/2;
             int yPos = Console.WindowHeight/2;
             ConsoleColor clr = ConsoleColor.DarkCyan;
 
-            player = Factory.BuildGameObject(xPos, yPos, clr);//create an instance of GameObject
+            player = new Player('$', 0, xPos, yPos, clr);//create an instance of GameObject
+
+            //
+            // UPCASTING
+            // going from a DERIVED type (Player) to a BASE type (GameObject)
+            // ALWAYS SAFE!
+            GameObject p1 = player;
+
+            p1 = new GameObject(6, 4, ConsoleColor.DarkYellow);
+
+            //
+            // DOWNCASING
+            //going from a BASE type (GameObject) to a DERIVED type (Player)
+            // NOT SAFE!!!!!!!
+            // ways to "safely" downcast
+            // 1. try-catch with explicit cast
+            try
+            {
+                Player p2 = (Player)p1;
+            }
+            catch (Exception)
+            {
+            }
+            //2. use the 'as' keyword
+            //   if it CANNOT be downcasted, NULL will be used
+            Player p3 = p1 as Player;
+            if(p3 != null)
+                Console.WriteLine(p3.X);
+
+            //3. use the pattern matching
+            if(p1 is Player p4)
+                Console.WriteLine(p4.X);
+
+
             List<GameObject> gameObjects = new List<GameObject>();
             for (int i = 0; i < 20; i++)
             {
