@@ -89,6 +89,10 @@ namespace Day07
                 //clr = GetColor();
                 gameObjects.Add(Factory.BuildGameObject());
             }
+            for (int i = 0; i < 5; i++)
+            {
+                gameObjects.Add(Factory.BuildTreasure());
+            }
             gameObjects.Add(player);
 
             Console.Clear();
@@ -96,8 +100,9 @@ namespace Day07
             {
                 Update(gameObjects);
                 Render(gameObjects);
-                GameObject.ObjectInfo();
+                //GameObject.ObjectInfo();
                 Collision(player, gameObjects);
+                if(!_isOver) HUD(player);
             }
             //player.Render();//player is passed in as the 'this'
             ////DrawGameObject(player);
@@ -115,20 +120,39 @@ namespace Day07
 
         }
 
+        private static void HUD(Player player)
+        {
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine($"Player 1  Score: {player.Score}  Health: {player.Health}");
+        }
+
         private static void Collision(Player player, List<GameObject> gameObjects)
         {
-            foreach (var item in gameObjects)
+            for (int i = gameObjects.Count - 1; i >= 0; i--)
             {
-                if(player != item)
+                GameObject item = gameObjects[i];
+                if (player != item)
                 {
                     if(player.X == item.X && player.Y == item.Y)
                     {
-                        Console.BackgroundColor = ConsoleColor.Red;
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine("Game over man!");
-                        Console.ResetColor();
-                        _isOver = true;
+                        if (item is Treasure pickUp)
+                        {
+                            player.Score += pickUp.Value;
+                            gameObjects.RemoveAt(i);//remove the treasure
+                        }
+                        else
+                        {
+                            player.Health -= 10;
+                            if (player.Health <= 0)
+                            {
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("Game over man!");
+                                Console.ResetColor();
+                                _isOver = true;
+                            }
+                        }
                         break;
                     }
                 }

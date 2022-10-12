@@ -24,6 +24,13 @@ namespace Day07CL
             return new GameObject(xPos, yPos, clr);
         }
 
+        public static GameObject BuildTreasure()
+        {
+            int xPos = randy.Next(Console.WindowWidth);
+            int yPos = randy.Next(Console.WindowHeight);
+            return new Treasure(randy.Next(1000), xPos, yPos, ConsoleColor.Yellow);
+        }
+
         public static FantasyWeapon MakeWeapon(WeaponRarity rarity, int level, int maxDamage, int cost)
         {
             return new FantasyWeapon(rarity, level, maxDamage, cost);

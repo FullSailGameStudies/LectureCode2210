@@ -10,12 +10,14 @@ namespace Day07CL
     {
         public char Symbol { get; set; }
         public int Score { get; set; }
+        public int Health { get; set; }
 
         //public Player() {}  default constructor
 
         //my player constructor must call the base constructor to build the GameObject
         public Player(char symbol, int score, int xPos, int yPos, ConsoleColor clr) : base(xPos, yPos, clr)
         {
+            Health = 100;
             Symbol = symbol;
             Score = score;
         }
