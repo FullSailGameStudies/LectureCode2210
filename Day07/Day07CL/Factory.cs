@@ -24,6 +24,11 @@ namespace Day07CL
             return new GameObject(xPos, yPos, clr);
         }
 
+        public static FantasyWeapon MakeWeapon(WeaponRarity rarity, int level, int maxDamage, int cost)
+        {
+            return new FantasyWeapon(rarity, level, maxDamage, cost);
+        }
+
 
         public static ConsoleColor GetColor()
         {
