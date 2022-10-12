@@ -37,6 +37,8 @@ namespace Day07
             Console.WriteLine($"Dora swings sting and does {damage} damage to the rat.");
             backpack.AddItem(sting);
             backpack.AddItem(new BowWeapon(5, 10, WeaponRarity.Common, 1, 10, 10));
+            backpack.PrintInventory();
+            Console.ReadKey();
 
             Player player;//null
             int xPos = Console.WindowWidth/2;
