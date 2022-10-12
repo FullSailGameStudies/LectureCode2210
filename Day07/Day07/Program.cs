@@ -31,19 +31,19 @@ namespace Day07
             Console.WriteLine($"Dora swings sting and does {damage} damage to the rat.");
 
             GameObject player;//null
-            int xPos = randy.Next(Console.WindowWidth);
-            int yPos = randy.Next(Console.WindowHeight);
-            ConsoleColor clr = GetColor();
+            int xPos = Console.WindowWidth/2;
+            int yPos = Console.WindowHeight/2;
+            ConsoleColor clr = ConsoleColor.DarkCyan;
 
-            player = new GameObject(xPos, yPos, clr);//create an instance of GameObject
+            player = Factory.BuildGameObject(xPos, yPos, clr);//create an instance of GameObject
             List<GameObject> gameObjects = new List<GameObject>();
             for (int i = 0; i < 20; i++)
             {
-                xPos = randy.Next(Console.WindowWidth);
-                yPos = randy.Next(Console.WindowHeight);
+                //xPos = randy.Next(Console.WindowWidth);
+                //yPos = randy.Next(Console.WindowHeight);
                 Debug.Write(i);
-                clr = GetColor();
-                gameObjects.Add(new GameObject(xPos, yPos, clr));
+                //clr = GetColor();
+                gameObjects.Add(Factory.BuildGameObject());
             }
             player.Render();//player is passed in as the 'this'
             //DrawGameObject(player);
@@ -70,12 +70,5 @@ namespace Day07
             Console.ResetColor();
         }
 
-        private static ConsoleColor GetColor()
-        {
-            ConsoleColor color;
-            while ((color = (ConsoleColor)randy.Next(16)) == ConsoleColor.Black) ;
-            Debug.WriteLine(color);
-            return color;
-        }
     }
 }
