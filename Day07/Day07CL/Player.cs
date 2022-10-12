@@ -19,5 +19,61 @@ namespace Day07CL
             Symbol = symbol;
             Score = score;
         }
+
+        public void MoveLeft()
+        {
+            if (X == 0)
+                X = Console.WindowWidth - 1;
+            else
+                X--;
+        }
+        public void MoveRight()
+        {
+            if (X == Console.WindowWidth - 1)
+                X = 0;
+            else
+                X++;
+        }
+        public void MoveUp()
+        {
+            if (Y == 0)
+                Y = Console.WindowHeight - 1;
+            else
+                Y--;
+        }
+        public void MoveDown()
+        {
+            if (Y == Console.WindowHeight - 1)
+                Y = 0;
+            else
+                Y++;
+        }
+
+        public bool Update()
+        {
+            bool isOver = false;
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            switch (key.Key)
+            {
+                case ConsoleKey.Escape:
+                    isOver = true;
+                    break;
+                case ConsoleKey.LeftArrow:
+                    MoveLeft();
+                    break;
+                case ConsoleKey.UpArrow:
+                    MoveUp();
+                    break;
+                case ConsoleKey.RightArrow:
+                    MoveRight();
+                    break;
+                case ConsoleKey.DownArrow:
+                    MoveDown();
+                    break;
+                default:
+                    break;
+            }
+            return isOver;
+        }
     }
 }

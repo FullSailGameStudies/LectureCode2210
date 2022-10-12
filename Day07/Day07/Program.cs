@@ -2,6 +2,7 @@
 using Day07CL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 
@@ -88,21 +89,69 @@ namespace Day07
                 //clr = GetColor();
                 gameObjects.Add(Factory.BuildGameObject());
             }
-            player.Render();//player is passed in as the 'this'
-            //DrawGameObject(player);
-            int index = 0;
-            foreach (var gObj in gameObjects)
+            gameObjects.Add(player);
+
+            Console.Clear();
+            while (!_isOver)
             {
-                gObj.Render(); //gObj is passed in as the 'this' parameter
-                //DrawGameObject(gObj);
-                Console.Write(index++);
+                Update(gameObjects);
+                Render(gameObjects);
+                GameObject.ObjectInfo();
+                Collision(player, gameObjects);
             }
-            GameObject.ObjectInfo();
+            //player.Render();//player is passed in as the 'this'
+            ////DrawGameObject(player);
+            //int index = 0;
+            //foreach (var gObj in gameObjects)
+            //{
+            //    gObj.Render(); //gObj is passed in as the 'this' parameter
+            //    //DrawGameObject(gObj);
+            //    Console.Write(index++);
+            //}
             //player.X = Console.WindowWidth / 2;//call the set on the property
             //int x = player.X; //calls the get on the property
 
             Console.ReadKey();
 
+        }
+
+        private static void Collision(Player player, List<GameObject> gameObjects)
+        {
+            foreach (var item in gameObjects)
+            {
+                if(player != item)
+                {
+                    if(player.X == item.X && player.Y == item.Y)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Game over man!");
+                        Console.ResetColor();
+                        _isOver = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private static void Render(List<GameObject> gameObjects)
+        {
+            Console.Clear();
+            foreach (var item in gameObjects)
+            {
+                item.Render();
+            }
+        }
+
+        static bool _isOver = false;
+        private static void Update(List<GameObject> gameObjects)
+        {
+            foreach (var item in gameObjects)
+            {
+                if (item is Player player)
+                    _isOver = player.Update();
+            }
         }
 
         private static void DrawGameObject(GameObject gObject)
