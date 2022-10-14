@@ -12,6 +12,8 @@ namespace Day07CL
         public int Score { get; set; }
         public int Health { get; set; }
 
+        private int _oldX, _oldY;
+
         //public Player() {}  default constructor
 
         //my player constructor must call the base constructor to build the GameObject
@@ -22,8 +24,15 @@ namespace Day07CL
             Score = score;
         }
 
+        private void SavePosition()
+        {
+            _oldX = X;
+            _oldY = Y;
+        }
+
         public void MoveLeft()
         {
+            SavePosition();
             if (X == 0)
                 X = Console.WindowWidth - 1;
             else
@@ -31,6 +40,7 @@ namespace Day07CL
         }
         public void MoveRight()
         {
+            SavePosition();
             if (X == Console.WindowWidth - 1)
                 X = 0;
             else
@@ -38,6 +48,7 @@ namespace Day07CL
         }
         public void MoveUp()
         {
+            SavePosition();
             if (Y == 0)
                 Y = Console.WindowHeight - 1;
             else
@@ -45,13 +56,14 @@ namespace Day07CL
         }
         public void MoveDown()
         {
+            SavePosition();
             if (Y == Console.WindowHeight - 1)
                 Y = 0;
             else
                 Y++;
         }
 
-        public bool Update()
+        public override bool Update()
         {
             bool isOver = false;
             ConsoleKeyInfo key = Console.ReadKey(true);
@@ -80,11 +92,20 @@ namespace Day07CL
 
         public override void Render()
         {
+            Erase(_oldX, _oldY);
             //not calling the base means FULLY overriding
             //base.Render();//calling the base means EXTENDING the base version
             Console.SetCursorPosition(this.X, Y);
             Console.ForegroundColor = Color;
             Console.Write(Symbol);
+            Console.ResetColor();
+        }
+
+        private void Erase(int oldX, int oldY)
+        {
+            Console.SetCursorPosition(oldX, oldY);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write(" ");
             Console.ResetColor();
         }
     }

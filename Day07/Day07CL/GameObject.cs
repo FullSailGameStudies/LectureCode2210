@@ -96,6 +96,11 @@ namespace Day07CL
             Console.ResetColor();
         }
 
+        public virtual bool Update()
+        {
+            return false;
+        }
+
         //there is no 'this' parameter in static methods
         public static void ObjectInfo()
         {

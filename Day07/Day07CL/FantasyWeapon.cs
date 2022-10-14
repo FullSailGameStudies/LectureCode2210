@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,7 +36,12 @@ namespace Day07CL
 
         public virtual void Display()
         {
-            Console.WriteLine($"I have a {Rarity} level {Level} weapon that can do {MaxDamage} of damage. And it costs {Cost} gold.");
+
+            Console.Write($"I have a ");
+            Console.ForegroundColor = Rarity.GetColor();
+            Console.Write($"{Rarity}");
+            Console.ResetColor();
+            Console.WriteLine($" level { Level} weapon that can do {MaxDamage} of damage. And it costs {Cost} gold.");
 
         }
     }

@@ -12,6 +12,13 @@ namespace Day07CL
     {
         static Random randy = new Random();
 
+        public static GameObject BuildSeeker(Player player)
+        {
+            int xPos = randy.Next(Console.WindowWidth);
+            int yPos = randy.Next(Console.WindowHeight);
+            ConsoleColor clr = GetColor();
+            return new Seeker(player, xPos, yPos, clr);
+        }
         public static GameObject BuildGameObject()
         {
             int xPos = randy.Next(Console.WindowWidth);

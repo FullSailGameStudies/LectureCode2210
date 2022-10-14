@@ -48,6 +48,7 @@ namespace Day07
             backpack.AddItem(new BowWeapon(5, 10, WeaponRarity.Common, 1, 10, 10));
             backpack.PrintInventory();
             Console.ReadKey();
+            List<BowWeapon> bows = backpack.Bows();
 
             Player player;//null
             int xPos = Console.WindowWidth/2;
@@ -97,9 +98,13 @@ namespace Day07
                 //clr = GetColor();
                 gameObjects.Add(Factory.BuildGameObject());
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 gameObjects.Add(Factory.BuildTreasure());
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                gameObjects.Add(Factory.BuildSeeker(player));
             }
             gameObjects.Add(player);
 
@@ -131,6 +136,10 @@ namespace Day07
         private static void HUD(Player player)
         {
             Console.SetCursorPosition(0, 0);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine("                                                                        ");
+            Console.SetCursorPosition(0, 0);
+            Console.ResetColor();
             Console.WriteLine($"Player 1  Score: {player.Score}  Health: {player.Health}");
         }
 
@@ -169,7 +178,7 @@ namespace Day07
 
         private static void Render(List<GameObject> gameObjects)
         {
-            Console.Clear();
+            //Console.Clear();
             foreach (var item in gameObjects)
             {
                 item.Render();
@@ -183,6 +192,8 @@ namespace Day07
             {
                 if (item is Player player)
                     _isOver = player.Update();
+                else
+                    item.Update();
             }
         }
 
