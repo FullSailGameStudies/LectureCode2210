@@ -77,5 +77,15 @@ namespace Day07CL
             }
             return isOver;
         }
+
+        public override void Render()
+        {
+            //not calling the base means FULLY overriding
+            //base.Render();//calling the base means EXTENDING the base version
+            Console.SetCursorPosition(this.X, Y);
+            Console.ForegroundColor = Color;
+            Console.Write(Symbol);
+            Console.ResetColor();
+        }
     }
 }

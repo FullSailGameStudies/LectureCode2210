@@ -62,7 +62,7 @@ namespace Day07CL
 
         //AUTO PROPERTY
         //only property (compiler will provide the field and the code for get/set)
-        public ConsoleColor Color { get; private set; } = ConsoleColor.DarkCyan;
+        public ConsoleColor Color { get; protected set; } = ConsoleColor.DarkCyan;
         #endregion
 
         #region Constructors (c'tor)
@@ -88,7 +88,7 @@ namespace Day07CL
         //an INSTANCE method (non-static)
         //instance methods have a hidden parameter called 'this'
         //'this' is the instance that the method was called on
-        public void Render()
+        public virtual void Render()
         {
             Console.SetCursorPosition(this.X, Y);
             Console.BackgroundColor = Color;

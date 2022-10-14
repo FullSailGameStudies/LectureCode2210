@@ -18,6 +18,13 @@ namespace Day07
             num = (int)bigNum;//explicit casting
             //num = (int)"5";
 
+            Console.WriteLine("Weapon Rarities:");
+            foreach (var rarity in Enum.GetValues<WeaponRarity>())
+            {
+                Console.WriteLine(rarity);
+            }
+            Console.ReadKey();
+
 
             Inventory backpack = new Inventory(3, new List<FantasyWeapon>());
             //backpack.AddItem("map");
@@ -35,6 +42,7 @@ namespace Day07
 
             FantasyWeapon sting = new FantasyWeapon(WeaponRarity.Legendary, 100, 1000, 100000);
             int damage = sting.DoDamage();
+            damage = sting.DoDamage(100);
             Console.WriteLine($"Dora swings sting and does {damage} damage to the rat.");
             backpack.AddItem(sting);
             backpack.AddItem(new BowWeapon(5, 10, WeaponRarity.Common, 1, 10, 10));

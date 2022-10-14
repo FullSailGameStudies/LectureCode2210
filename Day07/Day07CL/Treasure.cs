@@ -14,5 +14,11 @@ namespace Day07CL
         }
 
         public int Value { get; }
+
+        public override void Render()
+        {
+            Color = Factory.GetColor();
+            base.Render();//calling the base means EXTENDING the base version
+        }
     }
 }

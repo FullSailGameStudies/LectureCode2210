@@ -17,5 +17,12 @@ namespace Day07CL
 
         public int ArrowCount { get; private set; }
         public int ArrowCapacity { get; private set; }
+
+        public override void Display()
+        {
+            base.Display();
+            Console.WriteLine($"I have {ArrowCount} arrows. I can have up to {ArrowCapacity} arrows.");
+
+        }
     }
 }
