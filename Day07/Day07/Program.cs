@@ -21,7 +21,11 @@ namespace Day07
             Console.WriteLine("Weapon Rarities:");
             foreach (var rarity in Enum.GetValues<WeaponRarity>())
             {
-                Console.WriteLine(rarity);
+                foreach (var power in Enum.GetValues<Superpower>())
+                {
+                    Console.WriteLine($"{rarity} {power}");
+                }
+
             }
             Console.ReadKey();
 
@@ -145,6 +149,12 @@ namespace Day07
 
         private static void Collision(Player player, List<GameObject> gameObjects)
         {
+            //loop over game objects
+            //  check x & y values w/ the player
+            //  if collision
+            //      if treasure
+            //          add to player's score
+            //
             for (int i = gameObjects.Count - 1; i >= 0; i--)
             {
                 GameObject item = gameObjects[i];
@@ -157,18 +167,22 @@ namespace Day07
                             player.Score += pickUp.Value;
                             gameObjects.RemoveAt(i);//remove the treasure
                         }
-                        else
+                        else if(item is Seeker seeker)
+                        {
+                            player.Health = 0;
+                        }
+                        else //if(item is GameObject)
                         {
                             player.Health -= 10;
-                            if (player.Health <= 0)
-                            {
-                                Console.BackgroundColor = ConsoleColor.Red;
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("Game over man!");
-                                Console.ResetColor();
-                                _isOver = true;
-                            }
+                        }
+                        if (player.Health <= 0)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Red;
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Game over man!");
+                            Console.ResetColor();
+                            _isOver = true;
                         }
                         break;
                     }
